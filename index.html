@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Note taker app</title>
+</head>
+<body>
+    <div id="nav" class="overlay">
+        <div class="overlay-content">
+            <a onclick="closeUp()" id="close-button">&times;</a>
+            <p id="overlay-result"></p>
+        </div>
+    </div>
+    <div id="body-content">
+        <h1>Note taker</h1>
+        <h2>Add a new note:</h2>
+        <div id="form-div">
+            <label for="textInput">Note:</label>
+            &nbsp
+            <textarea name="" id="textInput" cols="120" rows="7" placeholder="Write your note here"></textarea>
+        </div>
+        <div>
+            <br>
+            <button onclick="addText()" id="textButton">Add Note</button>
+        </div>
+        <table id="result">
+        </table>
+    </div>
+    <script>
+        var note = 0;
+        var id = 0;
+        function addText(){
+            note++;
+            localStorage.setItem(id,document.getElementById('textInput').value)
+            console.log(localStorage.getItem(id));
+            document.getElementById('result').innerHTML+="<tr onclick='openUp(this)'><td><div id='object-div'><h4>Note "
+                +note+"</h4><p id='object-p'>"+document.getElementById('textInput').value+
+                "</p><button id='viewButton'>View Detail</button></div></td><tr>"
+            document.getElementById('textInput').value="";
+            id+=2;
+        }
+        function openUp(e){
+            document.getElementById('nav').style.width = "100%";
+            document.getElementById('overlay-result').innerHTML = localStorage.getItem(e.rowIndex);
+        }
+        function closeUp(){
+            document.getElementById('nav').style.width = "0%";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
